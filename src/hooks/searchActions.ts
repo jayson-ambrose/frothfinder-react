@@ -1,6 +1,6 @@
 export default function searchActions (query: string) {
 
-    const getBreweryByName = (query: string) => {
+    const getBreweryByName = async (query: string) => {
         fetch(`https://api.openbrewerydb.org/v1/breweries/search?query=${query}`)
     }
     //get brewery by name

@@ -1,16 +1,15 @@
-export default function searchActions (query: string) {
-
-    const getBreweryByName = async (query: string) => {
+export async function  getBreweryByName (query: string) {
         fetch(`https://api.openbrewerydb.org/v1/breweries/search?query=${query}`)
+        .then(resp => resp.json())
+        .then(data => console.log(data))
     }
+    
     //get brewery by name
     //get breweries near me SG: paginated
     //get breweries by city SG: include surrounding cities option
     //spike: client-side pagination or remote pagination
     //per page default: 50 max: 200
     //get random brewery near me
-    console.log(query)
-}
 
 // typical return from api.
 

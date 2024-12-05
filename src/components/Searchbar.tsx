@@ -14,7 +14,7 @@ export default function Searchbar () {
     
     return (
         <>
-        <div className="p-2">
+        <div className="p-2 flex flex-col justify-center h-full">
             <Input placeholder="search..." value={search} onChange={(e) => handleChange(e)}/>
             <div className="flex flex-row mt-2">
                 <Button className="mx-1" onClick={() => getBreweryByName(search)}>Find Froth</Button>

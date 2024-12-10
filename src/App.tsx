@@ -1,24 +1,32 @@
-import Searchbar from './components/Searchbar'
+import { useState } from 'react'
 import Section from './components/Section'
 import SearchSection from './components/SearchSection'
+import { getBreweryByName } from './hooks/searchActions'
+import SearchResults from './components/SearchResults'
 
 function App() {
 
+  const [searchResult, setSearchResult] = useState<any>([])
+
+  const handleSearch = async (val: string) => {
+    setSearchResult(await getBreweryByName(val))
+  }
+
   return (
     <>
-    <SearchSection/>
+    <SearchSection handleSearch={handleSearch}/>
     <div draggable='false' className='bg-black py-10 flex flex-col items-center pointer-events-none'>
       <img draggable='false' className='h-72 w-auto select-none pointer-events-none' src='https://cdn.imgchest.com/files/7ogcbaaodwy.png' alt='frothfinder logo' id='logo'/>
     </div>
-    <div className='flex justify-around lg:flex-row sm:flex-col'>
+    <div className='flex justify-around flex-col lg:flex-row'>
       <Section borderColor='border-themeRed'>
-        <Searchbar />
+        <SearchResults searchResult={searchResult}/>
       </Section>
       <Section borderColor='border-themeYellow'>
-        <Searchbar />
+        <h1></h1>
       </Section>
       <Section borderColor='border-themeOrange'>
-        <Searchbar />
+        <h1></h1>
       </Section>
     </div>
     </>

@@ -1,10 +1,26 @@
-import Searchbar from "./Searchbar"
-export default function SearchSection() {
+import React, { useState } from 'react'
+import { Button } from "./ui/button"
+import { Input } from "./ui/input"
+import SearchDropdown from "./SearchDropdown"
+
+export default function SearchSection ({ handleSearch }: {handleSearch: Function}) {
+    
+    const [ search, setSearch ] = useState('')
+    
+    const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+        setSearch(e.currentTarget.value)
+    }
 
     return (
         <>
         <div className="bg-white absolute mx-5 my-5 inset-x-0 inset-y-0 w-96 h-28 border-4 rounded-lg">
-            <Searchbar/>
+            <div className="p-2 flex flex-col justify-center h-full">
+                <Input placeholder="search..." value={search} onChange={(e) => handleChange(e)}/>
+                <div className="flex flex-row mt-2">
+                    <Button className="mx-1" onClick={() => handleSearch(search)}>Find Froth</Button>
+                    <SearchDropdown/>
+                </div>
+            </div>
         </div>
         </>
     )

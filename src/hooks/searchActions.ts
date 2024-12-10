@@ -1,7 +1,8 @@
 export async function  getBreweryByName (query: string) {
-        fetch(`https://api.openbrewerydb.org/v1/breweries/search?query=${query}`)
+        const data = await fetch(`https://api.openbrewerydb.org/v1/breweries/search?query=${query}`)
         .then(resp => resp.json())
-        .then(data => console.log(data))
+
+        return data
     }
     
     //get brewery by name

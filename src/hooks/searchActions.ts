@@ -1,9 +1,16 @@
 export async function  getBreweryByName (query: string) {
-        const data = await fetch(`https://api.openbrewerydb.org/v1/breweries/search?query=${query}`)
+        const data = await fetch(`https://api.openbrewerydb.org/v1/breweries?by_name=${query}`)
         .then(resp => resp.json())
 
         return data
     }
+
+export async function getBreweryByCity (query: string) {
+    const data = await fetch(`https://api.openbrewerydb.org/v1/breweries?by_city=${query}`)
+    .then(resp => resp.json())
+
+    return data
+}
     
     //get brewery by name
     //get breweries near me SG: paginated

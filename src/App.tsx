@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import Section from './components/Section'
 import SearchSection from './components/SearchSection'
 import { getBreweryByName } from './hooks/searchActions'
@@ -8,7 +8,8 @@ function App() {
 
   const [searchResult, setSearchResult] = useState<any>([])
 
-  const handleSearch = async (val: string) => {
+  const handleSearch = async (e: React.SyntheticEvent<HTMLFormElement>, val: string) => {
+    e.preventDefault()
     setSearchResult(await getBreweryByName(val))
   }
 

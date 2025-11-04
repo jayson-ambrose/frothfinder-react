@@ -14,7 +14,7 @@ export default function SearchSection ({ handleSearch }: {handleSearch: Function
 
     return (
         <>
-        <form onSubmit={(e) => handleSearch(e, search)} className="bg-white absolute mx-5 my-5 inset-x-0 inset-y-0 w-96 h-28 border-4 rounded-lg">
+        <form onSubmit={(e) => handleSearch(e, search, searchType)} className="bg-white absolute mx-5 my-5 inset-x-0 inset-y-0 w-96 h-28 border-4 rounded-lg">
             <div className="p-2 flex flex-col justify-center h-full">
                 <Input placeholder="search..." value={search} onChange={(e) => handleChange(e)}/>
                 <div className="flex flex-row mt-2">

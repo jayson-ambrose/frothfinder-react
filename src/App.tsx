@@ -1,16 +1,28 @@
 import React, { useState } from 'react'
 import Section from './components/Section'
 import SearchSection from './components/SearchSection'
-import { getBreweryByName } from './hooks/searchActions'
+import { getBreweryByName, getBreweryByCity } from './hooks/searchActions'
 import SearchResults from './components/SearchResults'
+import BreweryDetails from './components/BreweryDetails'
 
 function App() {
 
   const [searchResult, setSearchResult] = useState<any>([])
+  const [activeBrewery, setActiveBrewery] = useState<any>(null)
 
-  const handleSearch = async (e: React.SyntheticEvent<HTMLFormElement>, val: string) => {
+  const handleSearch: Function = async (e: React.SyntheticEvent<HTMLFormElement>, val: string, filter: string) => {
     e.preventDefault()
-    setSearchResult(await getBreweryByName(val))
+    console.log(filter)
+
+    if (filter.toLowerCase() == "name"){
+      setSearchResult(await getBreweryByName(val))
+    } else if (filter.toLowerCase() == "city") {
+      setSearchResult(await getBreweryByCity(val))
+    }     
+  }
+
+  const handleChangeActiveBrewery: Function = (breweryData: any) : void => {
+    setActiveBrewery(breweryData)
   }
 
   return (
@@ -21,10 +33,13 @@ function App() {
     </div>
     <div className='flex justify-around flex-col lg:flex-row'>
       <Section borderColor='border-themeRed'>
-        <SearchResults searchResult={searchResult}/>
+        <SearchResults 
+        searchResult={searchResult} 
+        handleChangeActiveBrewery={handleChangeActiveBrewery} 
+        activeBreweryId={activeBrewery ? activeBrewery.id : null}/>  
       </Section>
       <Section borderColor='border-themeYellow'>
-        <h1></h1>
+        {activeBrewery ? <BreweryDetails brewery={activeBrewery}/> : <h1>NO BREWERY SELECTED</h1>}
       </Section>
       <Section borderColor='border-themeOrange'>
         <h1></h1>

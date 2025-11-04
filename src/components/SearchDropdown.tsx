@@ -4,9 +4,7 @@ export default function SearchDropdown ({searchType, setSearchType}: {searchType
 
     const handleChangeSelection = (val: string) => {
         setSearchType(String(val).charAt(0).toUpperCase() + String(val).slice(1))
-    }    
-
-    console.log(searchType)
+    }
     
     return (
         <>

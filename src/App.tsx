@@ -4,6 +4,7 @@ import SearchSection from './components/SearchSection'
 import { getBreweryByName, getBreweryByCity } from './hooks/searchActions'
 import SearchResults from './components/SearchResults'
 import BreweryDetails from './components/BreweryDetails'
+import NoDetails from './components/NoDetails'
 
 function App() {
 
@@ -12,7 +13,6 @@ function App() {
 
   const handleSearch: Function = async (e: React.SyntheticEvent<HTMLFormElement>, val: string, filter: string) => {
     e.preventDefault()
-    console.log(filter)
 
     if (filter.toLowerCase() == "name"){
       setSearchResult(await getBreweryByName(val))
@@ -36,10 +36,11 @@ function App() {
         <SearchResults 
         searchResult={searchResult} 
         handleChangeActiveBrewery={handleChangeActiveBrewery} 
-        activeBreweryId={activeBrewery ? activeBrewery.id : null}/>  
+        activeBrewery={activeBrewery ? activeBrewery: null}/>  
       </Section>
       <Section borderColor='border-themeYellow'>
-        {activeBrewery ? <BreweryDetails brewery={activeBrewery}/> : <h1>NO BREWERY SELECTED</h1>}
+        {activeBrewery ? <BreweryDetails brewery={activeBrewery}/> : 
+          <NoDetails/>}
       </Section>
       <Section borderColor='border-themeOrange'>
         <h1></h1>

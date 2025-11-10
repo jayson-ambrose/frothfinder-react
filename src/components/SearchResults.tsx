@@ -4,10 +4,10 @@ import BreweryListCard from "./BreweryListCard"
 export default function SearchResults ({
     searchResult, 
     handleChangeActiveBrewery, 
-    activeBreweryId}:{
+    activeBrewery}:{
         searchResult: any[], 
         handleChangeActiveBrewery: Function, 
-        activeBreweryId: String}) {
+        activeBrewery: any}) {
 
     const mappedResults = searchResult.map((brewery) => {
         return (
@@ -15,7 +15,7 @@ export default function SearchResults ({
             key={brewery.id} 
             brewery={brewery}
             handleChangeActiveBrewery={handleChangeActiveBrewery} 
-            isActiveBrewery={(activeBreweryId == brewery.id) ? true : false}/>
+            activeBrewery={activeBrewery}/>
         )
     })
 

@@ -1,15 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Section from './components/Section'
 import SearchSection from './components/SearchSection'
 import { getBreweryByName, getBreweryByCity } from './hooks/searchActions'
 import SearchResults from './components/SearchResults'
 import BreweryDetails from './components/BreweryDetails'
 import NoDetails from './components/NoDetails'
+import ProfileSection from './components/ProfileSection'
 
 function App() {
 
   const [searchResult, setSearchResult] = useState<any>([])
   const [activeBrewery, setActiveBrewery] = useState<any>(null)
+  const [activeProfile, setActiveProfile] = useState<any>(null)
+  const [availableProfiles, setAvailableProfiles] = useState<any>([])
+
+  useEffect(() => {
+    if (activeProfile) {
+      return
+    } else if (!activeProfile) {
+      populateProfileList()
+    }
+  },[])
 
   const handleSearch: Function = async (e: React.SyntheticEvent<HTMLFormElement>, val: string, filter: string) => {
     e.preventDefault()
@@ -25,9 +36,37 @@ function App() {
     setActiveBrewery(breweryData)
   }
 
+  function populateProfileList() {
+
+    const profileData = localStorage.getItem("users")
+
+    if (profileData == null) {
+
+      const newGuest: any = {
+        name: "Visitor",
+        favorites: []
+      }      
+      setAvailableProfiles(availableProfiles.push(newGuest))
+
+      localStorage.setItem("users", JSON.stringify(availableProfiles))
+      //create guest and save to localStorage
+    } else {
+
+      parseUsersFromLocalStorage()
+      //setAvailableProfiles = localStorage.getItem(frothfinderUsers) <-parsed into individual user accounts
+    }
+  }
+
+  function parseUsersFromLocalStorage () {
+    let usersString: any = localStorage.getItem("users")
+    let usersArray: any = JSON.parse(usersString)
+
+    setAvailableProfiles(usersArray)
+  }
+
   return (
     <>
-    <SearchSection handleSearch={handleSearch}/>
+    <SearchSection handleSearch={handleSearch}/>    
     <div draggable='false' className='bg-black py-10 flex flex-col items-center pointer-events-none'>
       <img draggable='false' className='h-72 w-auto select-none pointer-events-none' src='https://cdn.imgchest.com/files/7ogcbaaodwy.png' alt='frothfinder logo' id='logo'/>
     </div>
@@ -43,7 +82,7 @@ function App() {
           <NoDetails/>}
       </Section>
       <Section borderColor='border-themeOrange'>
-        <h1></h1>
+        <ProfileSection activeProfile={activeProfile} availableProfiles={availableProfiles}/>
       </Section>
     </div>
     </>

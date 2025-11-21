@@ -1,8 +1,8 @@
 import { Button } from "./ui/button"
 
-export default function BreweryDetails ({brewery}: {brewery: any}) {
+export default function BreweryDetails ({brewery, profileIsActive}: {brewery: any, profileIsActive: boolean}) {
     
-    const {id, street, city, state, postal_code, name, phone, website_url, latitude, longitude} = brewery
+    const {street, city, state, postal_code, name, phone, website_url} = brewery
 
     function formatPhoneNumber(phoneString: string) {
 
@@ -24,7 +24,7 @@ export default function BreweryDetails ({brewery}: {brewery: any}) {
             <a target='blank' href={`https://www.google.com/maps/dir/?api=1&destination=${street}+${city}+${state}`} className='text-blue-500'>
                 Get Directions
             </a>
-            <Button className="bg-themeOrange">Favorite</Button>
+            <Button className={profileIsActive ? "bg-themeOrange" : "bg-gray-400 hover:bg-gray-400"}>Favorite</Button>
         </div>
     )
 

@@ -42,18 +42,14 @@ function App() {
 
     if (profileData == null) {
 
-      const newGuest: any = {
-        name: "Visitor",
+      const newGuest: any = { 
+        name: "Visitor",  
         favorites: []
       }      
       setAvailableProfiles(availableProfiles.push(newGuest))
-
       localStorage.setItem("users", JSON.stringify(availableProfiles))
-      //create guest and save to localStorage
     } else {
-
       parseUsersFromLocalStorage()
-      //setAvailableProfiles = localStorage.getItem(frothfinderUsers) <-parsed into individual user accounts
     }
   }
 
@@ -78,7 +74,7 @@ function App() {
         activeBrewery={activeBrewery ? activeBrewery: null}/>  
       </Section>
       <Section borderColor='border-themeYellow'>
-        {activeBrewery ? <BreweryDetails brewery={activeBrewery}/> : 
+        {activeBrewery ? <BreweryDetails brewery={activeBrewery} profileIsActive={activeProfile ? true : false}/> : 
           <NoDetails/>}
       </Section>
       <Section borderColor='border-themeOrange'>

@@ -43,6 +43,7 @@ function App() {
     if (profileData == null) {
 
       const newGuest: any = { 
+        id: "guest",
         name: "Visitor",  
         favorites: []
       }      

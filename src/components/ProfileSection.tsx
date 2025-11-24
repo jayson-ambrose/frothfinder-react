@@ -1,4 +1,4 @@
-import { Card } from "./ui/card";
+import ProfileSelectCard from "./ProfileSelectCard"
 
 export default function ProfileSection ({activeProfile, availableProfiles}: {activeProfile: null | any, availableProfiles: any[]}) {
 
@@ -6,7 +6,7 @@ export default function ProfileSection ({activeProfile, availableProfiles}: {act
 
     return(
         <div>
-            {activeProfile ? <Card>hello world</Card> : profileList}
+            {activeProfile ? <ProfileSelectCard/>: profileList}
         </div>
 
     )
